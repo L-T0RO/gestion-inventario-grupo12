@@ -9,19 +9,10 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ProfilePage from './pages/ProfilePage';
 import DashboardHomePage from './pages/DashboardHomePage';
 import CategoriasAdminPage from './pages/CategoriasAdminPage';
+import ProductosPage from './pages/ProductosPage';
+import MovimientosPage from './pages/MovimientosPage';
 import { authService } from './services/auth.service';
 import { ROLES } from './types/api.types';
-
-function ModuloPlaceholder({ titulo, responsable }) {
-  return (
-    <div className="card">
-      <h1 style={{ fontSize: '1.4rem', marginBottom: '0.5rem' }}>{titulo}</h1>
-      <p style={{ color: 'var(--text-secondary)' }}>
-        Módulo asignado a: <strong>{responsable}</strong>. Listo para conectar.
-      </p>
-    </div>
-  );
-}
 
 function ProtectedLayout({ user, onLogout, children }) {
   if (!user) {
@@ -91,10 +82,7 @@ export default function App() {
           path="/productos"
           element={
             <ProtectedLayout user={user} onLogout={handleLogout}>
-              <ModuloPlaceholder
-                titulo="Stock e Inventario (Productos)"
-                responsable="Lucas Rojas (Legajo 22269)"
-              />
+              <ProductosPage user={user} />
             </ProtectedLayout>
           }
         />
@@ -106,10 +94,7 @@ export default function App() {
               {user?.rol === ROLES.VENDEDOR ? (
                 <Navigate to="/" replace />
               ) : (
-                <ModuloPlaceholder
-                  titulo="Movimientos y Auditoría"
-                  responsable="Tiago de Rosa Cajarabilla (Legajo 22850)"
-                />
+                <MovimientosPage user={user} />
               )}
             </ProtectedLayout>
           }
