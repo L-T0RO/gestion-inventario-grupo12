@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ProfilePage from './pages/ProfilePage';
 import DashboardHomePage from './pages/DashboardHomePage';
+import CategoriasAdminPage from './pages/CategoriasAdminPage';
 import { authService } from './services/auth.service';
 import { ROLES } from './types/api.types';
 
@@ -121,10 +122,7 @@ export default function App() {
               {user?.rol !== ROLES.ADMIN ? (
                 <Navigate to="/" replace />
               ) : (
-                <ModuloPlaceholder
-                  titulo="Categorías y Administración"
-                  responsable="Máximo Martinez Moraes (Legajo 22331)"
-                />
+                <CategoriasAdminPage currentUser={user} />
               )}
             </ProtectedLayout>
           }
