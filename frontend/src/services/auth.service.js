@@ -24,7 +24,8 @@ function saveMockUsersStore(users) {
 }
 
 function sanitizeUser(user) {
-  const { password: _password, ...safeUser } = user;
+  const safeUser = { ...user };
+  delete safeUser.password;
   return safeUser;
 }
 
