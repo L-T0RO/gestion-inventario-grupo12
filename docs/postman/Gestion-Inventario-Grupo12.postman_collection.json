@@ -1,0 +1,276 @@
+{
+  "info": {
+    "_postman_id": "g12-prototipo-productos-stock-2026",
+    "name": "Gestion de Inventario - Grupo 12 (Prototipo Productos y Stock)",
+    "description": "Coleccion de pruebas para el prototipo del Sistema de Gestion de Inventario (Grupo 12). Cubre Health Check y todos los endpoints CRUD, paginacion, ordenamiento, busqueda y filtros de Productos y Stock sobre http://localhost:3000/api/v1.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "productoId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Verifica que la API del prototipo este levantada y respondiendo."
+      },
+      "response": []
+    },
+    {
+      "name": "Productos - Listar (Paginado y Ordenado)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productos?page=1&limit=10&sortBy=id&order=asc",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "sortBy",
+              "value": "id"
+            },
+            {
+              "key": "order",
+              "value": "asc"
+            }
+          ]
+        },
+        "description": "Obtiene el listado paginado y ordenado de productos desde mockStore."
+      },
+      "response": []
+    },
+    {
+      "name": "Productos - Buscar por texto",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productos?search=teclado&page=1&limit=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos"
+          ],
+          "query": [
+            {
+              "key": "search",
+              "value": "teclado"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Filtra productos por codigo, nombre, descripcion, ubicacion o categoria."
+      },
+      "response": []
+    },
+    {
+      "name": "Productos - Filtrar solo stock bajo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productos?stockBajo=true&page=1&limit=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos"
+          ],
+          "query": [
+            {
+              "key": "stockBajo",
+              "value": "true"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Devuelve unicamente los productos cuyo stockActual es menor o igual a stockMinimo."
+      },
+      "response": []
+    },
+    {
+      "name": "Productos - Obtener por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productos/{{productoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos",
+            "{{productoId}}"
+          ]
+        },
+        "description": "Obtiene la ficha o detalle de un producto especifico por su ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Productos - Crear producto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codigo\": \"PROD-004\",\n  \"nombre\": \"Auriculares Bluetooth\",\n  \"descripcion\": \"Auriculares con cancelacion de ruido\",\n  \"categoriaId\": 1,\n  \"ubicacion\": \"Estante A3\",\n  \"stockActual\": 2,\n  \"stockMinimo\": 5,\n  \"precioUnitario\": 32000\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/productos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos"
+          ]
+        },
+        "description": "Crea un nuevo producto en memoria (mockStore) y devuelve estado 201."
+      },
+      "response": []
+    },
+    {
+      "name": "Productos - Actualizar parcial (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"stockActual\": 20,\n  \"ubicacion\": \"Estante A1\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/productos/{{productoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos",
+            "{{productoId}}"
+          ]
+        },
+        "description": "Actualiza parcialmente uno o mas campos de un producto existente."
+      },
+      "response": []
+    },
+    {
+      "name": "Productos - Reemplazar / Actualizar (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"codigo\": \"PROD-001\",\n  \"nombre\": \"Teclado Mecanico RGB Pro\",\n  \"descripcion\": \"Teclado mecanico switch azul retroiluminado\",\n  \"categoriaId\": 1,\n  \"ubicacion\": \"Estante A1\",\n  \"stockActual\": 12,\n  \"stockMinimo\": 5,\n  \"precioUnitario\": 48000\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/productos/{{productoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos",
+            "{{productoId}}"
+          ]
+        },
+        "description": "Actualiza los datos de un producto mediante PUT."
+      },
+      "response": []
+    },
+    {
+      "name": "Productos - Eliminar por ID",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/productos/{{productoId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "productos",
+            "{{productoId}}"
+          ]
+        },
+        "description": "Elimina un producto de mockStore por su ID."
+      },
+      "response": []
+    }
+  ]
+}
