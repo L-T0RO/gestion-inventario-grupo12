@@ -1,5 +1,3 @@
-import React from "react";
-
 export function ProductoFichaDetalle({ producto, onEdit, onClose }) {
   if (!producto) return null;
 

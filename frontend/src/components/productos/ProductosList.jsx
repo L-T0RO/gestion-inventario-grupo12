@@ -1,5 +1,3 @@
-import React from "react";
-
 export function ProductosList({ productos, onSelectProducto, onDeleteProducto, onSort }) {
   if (!productos || productos.length === 0) {
     return <p>No hay productos para mostrar con los filtros actuales.</p>;

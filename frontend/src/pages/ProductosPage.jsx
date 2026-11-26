@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useState, useEffect } from 'react';
 import { productosService } from "../services/productos.service.js";
 import { ProductosList } from "../components/productos/ProductosList.jsx";
 import { ProductoFormModalOrView } from "../components/productos/ProductoFormModalOrView.jsx";
