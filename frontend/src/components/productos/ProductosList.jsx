@@ -1,68 +1,103 @@
+import "../../styles/ProductosList.css"
+
 export function ProductosList({ productos, onSelectProducto, onDeleteProducto, onSort }) {
   if (!productos || productos.length === 0) {
-    return <p>No hay productos para mostrar con los filtros actuales.</p>;
+    return (
+      <div className="prod-empty">
+        No hay productos para mostrar con los filtros actuales.
+      </div>
+    );
   }
 
   return (
-    <table border="1" cellPadding="8" cellSpacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>
-            <button type="button" onClick={() => onSort("codigo")}>Código</button>
-          </th>
-          <th>
-            <button type="button" onClick={() => onSort("nombre")}>Producto</button>
-          </th>
-          <th>Categoría</th>
-          <th>
-            <button type="button" onClick={() => onSort("ubicacion")}>Ubicación</button>
-          </th>
-          <th>
-            <button type="button" onClick={() => onSort("stockActual")}>Stock Actual</button>
-          </th>
-          <th>Stock Mínimo</th>
-          <th>
-            <button type="button" onClick={() => onSort("precioUnitario")}>Precio</button>
-          </th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {productos.map((prod) => (
-          <tr
-            key={prod.id}
-            style={{
-              backgroundColor: prod.alertaStockBajo ? "#fff3cd" : "transparent",
-            }}
-          >
-            <td>{prod.codigo}</td>
-            <td>
-              <button
-                type="button"
-                onClick={() => onSelectProducto(prod.id)}
-                style={{ background: "none", border: "none", textDecoration: "underline", cursor: "pointer", padding: 0 }}
+    <div className="prod-table-card">
+      <div className="prod-table-wrap">
+        <table className="prod-table">
+          <thead>
+            <tr>
+              <th>
+                <button type="button" className="prod-sort-btn" onClick={() => onSort("codigo")}>
+                  Código
+                </button>
+              </th>
+              <th>
+                <button type="button" className="prod-sort-btn" onClick={() => onSort("nombre")}>
+                  Producto
+                </button>
+              </th>
+              <th>Categoría</th>
+              <th>
+                <button type="button" className="prod-sort-btn" onClick={() => onSort("ubicacion")}>
+                  Ubicación
+                </button>
+              </th>
+              <th>
+                <button type="button" className="prod-sort-btn" onClick={() => onSort("stockActual")}>
+                  Stock Actual
+                </button>
+              </th>
+              <th>Stock Mínimo</th>
+              <th>
+                <button type="button" className="prod-sort-btn" onClick={() => onSort("precioUnitario")}>
+                  Precio
+                </button>
+              </th>
+              <th className="prod-th-right">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {productos.map((prod) => (
+              <tr
+                key={prod.id}
+                className={prod.alertaStockBajo ? "prod-row-low" : "prod-row"}
               >
-                {prod.nombre}
-              </button>
-            </td>
-            <td>{prod.categoriaNombre || prod.categoriaId}</td>
-            <td>{prod.ubicacion}</td>
-            <td>
-              {prod.stockActual} {prod.alertaStockBajo ? "(Bajo)" : ""}
-            </td>
-            <td>{prod.stockMinimo}</td>
-            <td>${Number(prod.precioUnitario).toLocaleString("es-AR")}</td>
-            <td>
-              <button type="button" onClick={() => onSelectProducto(prod.id)}>
-                Ver / Editar
-              </button>{" "}
-              <button type="button" onClick={() => onDeleteProducto(prod.id)}>
-                Eliminar
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+                <td className="prod-code">{prod.codigo}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="prod-link-btn"
+                    onClick={() => onSelectProducto(prod.id)}
+                  >
+                    {prod.nombre}
+                  </button>
+                </td>
+                <td>{prod.categoriaNombre || prod.categoriaId}</td>
+                <td>{prod.ubicacion}</td>
+                <td>
+                  <span className="prod-stock-cell">
+                    <span>{prod.stockActual}</span>
+                    {prod.alertaStockBajo && (
+                      <span className="prod-badge-low">Bajo</span>
+                    )}
+                  </span>
+                </td>
+                <td>{prod.stockMinimo}</td>
+                <td className="prod-price">
+                  ${Number(prod.precioUnitario).toLocaleString("es-AR")}
+                </td>
+                <td className="prod-td-right">
+                  <div className="prod-actions">
+                    <button
+                      type="button"
+                      className="prod-btn-edit"
+                      onClick={() => onSelectProducto(prod.id)}
+                    >
+                      Ver / Editar
+                    </button>
+                    <button
+                      type="button"
+                      className="prod-btn-delete"
+                      onClick={() => onDeleteProducto(prod.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
