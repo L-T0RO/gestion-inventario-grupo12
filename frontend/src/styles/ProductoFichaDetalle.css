@@ -1,0 +1,115 @@
+.prod-ficha-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.prod-ficha-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.prod-ficha-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.prod-ficha-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.prod-ficha-status-ok {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.prod-ficha-status-low {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.prod-ficha-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px 18px;
+  margin-bottom: 18px;
+}
+
+.prod-ficha-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.prod-ficha-item-full {
+  grid-column: 1 / -1;
+}
+
+.prod-ficha-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
+.prod-ficha-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.prod-ficha-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.prod-ficha-btn-primary {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #2563eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.prod-ficha-btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.prod-ficha-btn-secondary {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #334155;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.prod-ficha-btn-secondary:hover {
+  background: #f8fafc;
+}
